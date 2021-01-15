@@ -226,8 +226,13 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import cross_val_score
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn import svm
+from sklearn.ensemble import VotingClassifier
 
-
+########################################################################################################################
+####################################RANDOM FOREST GRIDSEARCH############################################################
+########################################################################################################################
 
 """
 
@@ -254,6 +259,10 @@ score = cross_val_score(gs, X_train, y_train, cv=5)
 print(score)
 """
 
+########################################################################################################################
+####################################RANDOM FOREST PIPELINE##############################################################
+########################################################################################################################
+
 """
 clf = RandomForestClassifier( n_estimators= 100, bootstrap= True, max_depth= 50, criterion= 'entropy',
                               random_state=0)
@@ -264,13 +273,16 @@ clf.fit(X_train, y_train)
 feat_labels = df.columns[1:]
 importances = clf.feature_importances_
 indices = np.argsort(importances)[::-1]
+print("From Random Forest Classifier \n")
 for f in range(X_train.shape[1]):
     print("%2d) %-*s %f" % (f + 1, 30, feat_labels[f], importances[indices[f]]))
-
 """
 
+########################################################################################################################
+####################################KNEAREST NEIGBORS GRIDSEARCH#########################################################
+########################################################################################################################
+
 """
-from sklearn.neighbors import KNeighborsClassifier
 
 parameters = {"n_neighbors": [3, 5, 8, 12], "p": [1, 2]}
 knn = KNeighborsClassifier()
@@ -292,16 +304,21 @@ print(gs.best_params_)
 score = cross_val_score(gs, X_train, y_train, cv=5)
 print(score)
 """
+
+########################################################################################################################
+####################################KNEAREST NEIGBORS PIPELINE##########################################################
+########################################################################################################################
+
 """
-from sklearn.neighbors import KNeighborsClassifier
 KNN = KNeighborsClassifier(n_neighbors=5, p=1, metric="minkowski")
 scores = cross_val_score(estimator = KNN, X= X_train, y= y_train, cv= 10, n_jobs=2)
 """
 
-"""
-from sklearn import svm
-from sklearn.preprocessing import StandardScaler
+########################################################################################################################
+####################################SVM############# GRIDSEARCH#########################################################
+########################################################################################################################
 
+"""
 
 parameters = [{'clf__C': [1e3, 5e3, 1e4, 5e4, 1e5],
               'clf__gamma': [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.1]}]
@@ -326,9 +343,33 @@ score = cross_val_score(gs, X_train, y_train, cv=5)
 print(score)
 """
 
-from sklearn import svm
-from sklearn.preprocessing import StandardScaler
+########################################################################################################################
+#################################### SVM ########### PIPELINE ##########################################################
+########################################################################################################################
 
+"""
 clf = svm.SVC(kernel='rbf', C = 1e3, gamma = 5e-3)
 pipe = Pipeline(steps=[('sc', StandardScaler()),('clf', clf)])
 score = cross_val_score(estimator = pipe, X= X_train, y= y_train, cv= 10, n_jobs=2)
+"""
+
+########################################################################################################################
+#################################### MAJORITY VOTTING ##################################################################
+########################################################################################################################
+
+RdF = RandomForestClassifier( n_estimators= 100, bootstrap= True, max_depth= 50, criterion= 'entropy',random_state=0)
+
+KNN = KNeighborsClassifier(n_neighbors=5, p=1, metric="minkowski")
+pipe1 = Pipeline([('knn', KNN)])
+
+clf = svm.SVC(kernel='rbf', C = 1e3, gamma = 5e-3,probability=True)
+pipe2 = Pipeline(steps=[('sc', StandardScaler()),('clf', clf)])
+
+mv_clf = VotingClassifier(estimators=[('knn', pipe1), ('svm', pipe2), ('rdf', RdF)], voting='soft')
+
+all_clf = [pipe1, pipe2, clf, mv_clf]
+clf_labels = ["KNN", "SVM", "RdF", "Majority_Voting"]
+
+for clf, label in zip(all_clf, clf_labels):
+    scores = cross_val_score(estimator=clf, X=X_train, y=y_train, cv=10, scoring='roc_auc')
+    print("Accuracy: %0.2f (+/- %0.2f) [%s]"% (scores.mean(), scores.std(), label))
