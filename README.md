@@ -18,7 +18,7 @@ profile = ProfileReport(df)
 HTML(filename="rapport.html")
 
 ```
-https://github.com/b5419/Covid_vaccination/blob/main/rapport.html
+http://htmlpreview.github.io/?https://github.com/b5419/Covid_vaccination/blob/main/rapport.html
 
 
 ```python
