@@ -46,11 +46,12 @@ fig.write_html("example_map.html")
 #IFrame(src='example_map.html', width=700, height=600)
 
 ```
+```html
 <iframe
   src="example_map.html"
   style="width:100%; height:300px;"
 ></iframe>
-
+```
 
 ```python
 import numpy as np
