@@ -19,7 +19,7 @@ HTML(filename="rapport.html")
 
 ```
 https://github.com/b5419/Covid_vaccination/blob/main/rapport.html
-<script src="rapport.html" />
+ <div w3-include-html="rapport.html"></div> 
 
 ```python
 df['iso_code'].fillna('GBR', inplace=True)
