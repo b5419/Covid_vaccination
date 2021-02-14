@@ -47,7 +47,7 @@ fig.write_html("example_map.html")
 
 ```
 
-{% include example_map.html %} 
+{% _include example_map.html %} 
 
 
 ```python
