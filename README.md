@@ -47,10 +47,7 @@ fig.write_html("example_map.html")
 
 ```
 
-<div align="center">
-		<img src="example_map.html" width="800" height="400">
-</div>
-
+[a link]
 
 ```python
 import numpy as np
