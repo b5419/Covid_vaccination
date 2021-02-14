@@ -47,7 +47,9 @@ fig.write_html("example_map.html")
 
 ```
 
-{% include https://github.com/b5419/Covid_vaccination/blob/main/_includes/example_map.html %}
+<div align="center">
+		<img src="example_map.html" width="800" height="400">
+</div>
 
 
 ```python
