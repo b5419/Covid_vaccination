@@ -46,6 +46,11 @@ fig.write_html("example_map.html")
 #IFrame(src='example_map.html', width=700, height=600)
 
 ```
+```{r res,warning=FALSE,message=FALSE,results='hide'}
+library(stargazer)
+stargazer(m1,m2,type = 'html',title = 'Models', out = "example_map.html")
+```
+
 
 ```{r, echo=FALSE}
 htmltools::includeHTML("example_map.html")
