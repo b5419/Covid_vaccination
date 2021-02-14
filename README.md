@@ -47,8 +47,9 @@ fig.write_html("example_map.html")
 
 ```
 
-{% _include example_map.html %} 
-
+```{r, echo=FALSE}
+htmltools::includeHTML("example_map.html")
+```
 
 ```python
 import numpy as np
