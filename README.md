@@ -47,7 +47,7 @@ fig.write_html("example_map.html")
 
 ```
 
-[a link]
+[a link] (https://github.com/b5419/Covid_vaccination/blob/main/example_map.html)
 
 ```python
 import numpy as np
