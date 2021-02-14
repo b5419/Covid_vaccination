@@ -99,3 +99,4 @@ for ax in ax.flat:
 for ax in fig.get_axes():
     ax.label_outer()
 ```
+<img src="vaccination_rate_4country.png" />
