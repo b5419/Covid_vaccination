@@ -17,4 +17,4 @@ profile = ProfileReport(df)
 
 HTML(filename="rapport.html")
 
-```python
+```
