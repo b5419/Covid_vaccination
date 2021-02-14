@@ -51,10 +51,7 @@ library(stargazer)
 stargazer(m1,m2,type = 'html',title = 'Models', out = "example_map.html")
 ```
 
-
----
-permalink: /example_map.html
----
+{% include example_map.html %}
 
 
 ```python
