@@ -46,8 +46,10 @@ fig.write_html("example_map.html")
 #IFrame(src='example_map.html', width=700, height=600)
 
 ```
+https://rawcdn.githack.com/b5419/Covid_vaccination/blob/main/example_map.html
 
-https://github.com/b5419/Covid_vaccination/blob/main/example_map.html
+
+
 
 ```python
 import numpy as np
