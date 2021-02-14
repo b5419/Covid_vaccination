@@ -52,9 +52,10 @@ stargazer(m1,m2,type = 'html',title = 'Models', out = "example_map.html")
 ```
 
 
-```{r, echo=FALSE}
-htmltools::includeHTML("example_map.html")
-```
+---
+permalink: /example_map.html
+---
+
 
 ```python
 import numpy as np
