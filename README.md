@@ -18,7 +18,7 @@ profile = ProfileReport(df)
 HTML(filename="rapport.html")
 
 ```
-
+https://github.com/b5419/Covid_vaccination/blob/main/rapport.html
 
 
 ```python
@@ -47,7 +47,7 @@ fig.write_html("example_map.html")
 
 ```
 
-[a link] (https://github.com/b5419/Covid_vaccination/blob/main/example_map.html)
+https://github.com/b5419/Covid_vaccination/blob/main/example_map.html
 
 ```python
 import numpy as np
