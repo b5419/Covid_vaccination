@@ -70,7 +70,7 @@ sns.despine(left = True, bottom = True)
 plt.show()
 ```
 
-
+<img src="first_second_vacination_per_country.png" />
 
 ```python
 import matplotlib.pyplot as plt
