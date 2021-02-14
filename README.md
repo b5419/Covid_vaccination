@@ -73,16 +73,17 @@ plt.show()
 
 
 ```python
-dat = df.sort_values(by = ["date"], ascending = False)
+import matplotlib.pyplot as plt
+dat = df.sort_values(by = ["date"], ascending = True)
 fig, ax = plt.subplots(2,2, figsize=(10, 10))
 
-ax[0, 0].plot(dat.loc[dat["iso_code"]=="USA","date"], dat.loc[dat["iso_code"]=="USA","daily_vaccinations_per_million"])
+ax[0, 0].plot(dat.loc[dat["iso_code"]=="USA","date"], dat.loc[dat["iso_code"]=="USA","daily_vaccinations_per_million"],"b.")
 ax[0, 0].set_title('USA')
-ax[0, 1].plot(dat.loc[dat["iso_code"]=="CHN","date"], dat.loc[dat["iso_code"]=="CHN","daily_vaccinations_per_million"])
+ax[0, 1].plot(dat.loc[dat["iso_code"]=="CHN","date"], dat.loc[dat["iso_code"]=="CHN","daily_vaccinations_per_million"],"r.")
 ax[0, 1].set_title('China')
-ax[1, 0].plot(dat.loc[dat["country"]=='United Kingdom',"date"], dat.loc[dat["country"]=='United Kingdom',"daily_vaccinations_per_million"])
+ax[1, 0].plot(dat.loc[dat["country"]=='United Kingdom',"date"], dat.loc[dat["country"]=='United Kingdom',"daily_vaccinations_per_million"],".", color="orange")
 ax[1, 0].set_title('United Kingdom')
-ax[1, 1].plot(dat.loc[dat["iso_code"]=="FRA","date"], dat.loc[dat["iso_code"]=="FRA","daily_vaccinations_per_million"])
+ax[1, 1].plot(dat.loc[dat["iso_code"]=="FRA","date"], dat.loc[dat["iso_code"]=="FRA","daily_vaccinations_per_million"],".", color="green")
 ax[1, 1].set_title('France')
 # rotate and align the tick labels so they look better
 ax[0,0].set_xticks(ax[0,0].get_xticks()[::5])
@@ -90,6 +91,10 @@ ax[0,1].set_xticks(ax[0,1].get_xticks()[::5])
 ax[1,0].set_xticks(ax[1,0].get_xticks()[::5])
 ax[1,1].set_xticks(ax[1,1].get_xticks()[::5])
 fig.autofmt_xdate()
+
+
+for ax in ax.flat:
+    ax.set(xlabel='date', ylabel='daily_vaccinations_per_million')
 
 for ax in fig.get_axes():
     ax.label_outer()
